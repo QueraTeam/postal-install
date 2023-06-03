@@ -1,14 +1,14 @@
 version: "3.9"
 services:
   web:
-    image: ghcr.io/postalserver/postal:{{version}}
+    image: ghcr.io/postalserver/postal:${POSTAL_VERSION}
     command: postal web-server
     network_mode: host
     volumes:
       - /opt/postal/config:/config
 
   smtp:
-    image: ghcr.io/postalserver/postal:{{version}}
+    image: ghcr.io/postalserver/postal:${POSTAL_VERSION}
     command: postal smtp-server
     network_mode: host
     cap_add:
@@ -17,21 +17,21 @@ services:
       - /opt/postal/config:/config
 
   worker:
-    image: ghcr.io/postalserver/postal:{{version}}
+    image: ghcr.io/postalserver/postal:${POSTAL_VERSION}
     command: postal worker
     network_mode: host
     volumes:
       - /opt/postal/config:/config
 
   cron:
-    image: ghcr.io/postalserver/postal:{{version}}
+    image: ghcr.io/postalserver/postal:${POSTAL_VERSION}
     command: postal cron
     network_mode: host
     volumes:
       - /opt/postal/config:/config
 
   requeuer:
-    image: ghcr.io/postalserver/postal:{{version}}
+    image: ghcr.io/postalserver/postal:${POSTAL_VERSION}
     command: postal requeuer
     network_mode: host
     volumes:
@@ -39,7 +39,7 @@ services:
 
   runner:
     profiles: ["tools"]
-    image: ghcr.io/postalserver/postal:{{version}}
+    image: ghcr.io/postalserver/postal:${POSTAL_VERSION}
     command: postal
     network_mode: host
     volumes:
