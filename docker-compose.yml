@@ -6,7 +6,7 @@ services:
     network_mode: host
     env_file: containers.env
     volumes:
-      - /opt/postal/config:/config
+      - ${POSTAL_CONFIG_DIR}:/config:ro
 
   smtp:
     image: ${POSTAL_IMAGE}:${POSTAL_VERSION}
@@ -17,7 +17,7 @@ services:
       - NET_BIND_SERVICE
     env_file: containers.env
     volumes:
-      - /opt/postal/config:/config
+      - ${POSTAL_CONFIG_DIR}:/config:ro
 
   worker:
     image: ${POSTAL_IMAGE}:${POSTAL_VERSION}
@@ -26,7 +26,7 @@ services:
     network_mode: host
     env_file: containers.env
     volumes:
-      - /opt/postal/config:/config
+      - ${POSTAL_CONFIG_DIR}:/config:ro
 
   cron:
     image: ${POSTAL_IMAGE}:${POSTAL_VERSION}
@@ -35,7 +35,7 @@ services:
     network_mode: host
     env_file: containers.env
     volumes:
-      - /opt/postal/config:/config
+      - ${POSTAL_CONFIG_DIR}:/config:ro
 
   requeuer:
     image: ${POSTAL_IMAGE}:${POSTAL_VERSION}
@@ -44,7 +44,7 @@ services:
     network_mode: host
     env_file: containers.env
     volumes:
-      - /opt/postal/config:/config
+      - ${POSTAL_CONFIG_DIR}:/config:ro
 
   runner:
     profiles: ["tools"]
@@ -54,5 +54,5 @@ services:
     network_mode: host
     env_file: containers.env
     volumes:
-      - /opt/postal/config:/config
+      - ${POSTAL_CONFIG_DIR}:/config:ro
 
