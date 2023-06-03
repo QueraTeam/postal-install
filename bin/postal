@@ -9,33 +9,29 @@ run() {
     eval $@
 }
 
-run-docker-compose() {
-    eval "docker-compose -p postal $@"
-}
-
 # Enter the root directory
 cd $ROOT_DIR
 
 # Run the right command
 case "$1" in
     start)
-        run-docker-compose "up -d ${@:2}"
+        docker compose up -d ${@:2}
         ;;
 
     stop)
-        run-docker-compose "down"
+        docker compose down
         ;;
 
     status)
-        run-docker-compose "ps"
+        docker compose ps
         ;;
 
     logs)
-        run-docker-compose "logs ${@:2}"
+        docker compose logs ${@:2}
         ;;
 
     dc)
-        run-docker-compose "${@:2}"
+        docker compose ${@:2}
         ;;
 
     bash)
@@ -44,12 +40,12 @@ case "$1" in
             exit 1
         fi
 
-        run-docker-compose "exec $2 bash"
+        docker compose exec $2 bash
         ;;
 
     initialize)
-        run-docker-compose "pull"
-        run-docker-compose "run --rm runner postal initialize"
+        docker compose pull
+        docker compose run --rm runner postal initialize
         ;;
 
     upgrade)
@@ -57,33 +53,33 @@ case "$1" in
 
         echo "Upgrading to the version specified in .env file."
 
-        run-docker-compose "pull"
-        run-docker-compose "run --rm runner postal upgrade"
-        run-docker-compose "up -d"
+        docker compose pull
+        docker compose run --rm runner postal upgrade
+        docker compose up -d
         ;;
 
     upgrade-db)
-        run-docker-compose "run --rm runner postal upgrade"
+        docker compose run --rm runner postal upgrade
         ;;
 
     console)
-        run-docker-compose "run --rm runner postal console"
+        docker compose run --rm runner postal console
         ;;
 
     make-user)
-        run-docker-compose "run --rm runner postal make-user"
+        docker compose run --rm runner postal make-user
         ;;
 
     default-dkim-record)
-        run-docker-compose "run --rm runner postal default-dkim-record"
+        docker compose run --rm runner postal default-dkim-record
         ;;
 
     test-app-smtp)
-        run-docker-compose "run --rm runner postal test-app-smtp"
+        docker compose run --rm runner postal test-app-smtp
         ;;
     
     version)
-        run-docker-compose "run --rm runner postal version"
+        docker compose run --rm runner postal version
         ;;
 
     bootstrap)
