@@ -5,10 +5,6 @@ set -e
 ORIGINAL_SCRIPT="$( realpath "${BASH_SOURCE[0]}" )"
 ROOT_DIR=$( cd "$( dirname "${ORIGINAL_SCRIPT}" )/.." && pwd )
 
-run() {
-    eval $@
-}
-
 # Enter the root directory
 cd $ROOT_DIR
 
@@ -53,7 +49,7 @@ case "$1" in
         ;;
 
     upgrade)
-        run "git pull origin main"
+        git pull origin main
 
         echo "Upgrading to the version specified in .env file."
 
