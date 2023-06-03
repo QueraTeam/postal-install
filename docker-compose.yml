@@ -1,6 +1,6 @@
 services:
   web:
-    image: ghcr.io/postalserver/postal:${POSTAL_VERSION}
+    image: ${POSTAL_IMAGE}:${POSTAL_VERSION}
     command: postal web-server
     restart: unless-stopped
     network_mode: host
@@ -9,7 +9,7 @@ services:
       - /opt/postal/config:/config
 
   smtp:
-    image: ghcr.io/postalserver/postal:${POSTAL_VERSION}
+    image: ${POSTAL_IMAGE}:${POSTAL_VERSION}
     command: postal smtp-server
     restart: unless-stopped
     network_mode: host
@@ -20,7 +20,7 @@ services:
       - /opt/postal/config:/config
 
   worker:
-    image: ghcr.io/postalserver/postal:${POSTAL_VERSION}
+    image: ${POSTAL_IMAGE}:${POSTAL_VERSION}
     command: postal worker
     restart: unless-stopped
     network_mode: host
@@ -29,7 +29,7 @@ services:
       - /opt/postal/config:/config
 
   cron:
-    image: ghcr.io/postalserver/postal:${POSTAL_VERSION}
+    image: ${POSTAL_IMAGE}:${POSTAL_VERSION}
     command: postal cron
     restart: unless-stopped
     network_mode: host
@@ -38,7 +38,7 @@ services:
       - /opt/postal/config:/config
 
   requeuer:
-    image: ghcr.io/postalserver/postal:${POSTAL_VERSION}
+    image: ${POSTAL_IMAGE}:${POSTAL_VERSION}
     command: postal requeuer
     restart: unless-stopped
     network_mode: host
@@ -48,7 +48,7 @@ services:
 
   runner:
     profiles: ["tools"]
-    image: ghcr.io/postalserver/postal:${POSTAL_VERSION}
+    image: ${POSTAL_IMAGE}:${POSTAL_VERSION}
     command: postal
     restart: unless-stopped
     network_mode: host
