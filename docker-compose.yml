@@ -4,6 +4,7 @@ services:
     command: postal web-server
     restart: unless-stopped
     network_mode: host
+    env_file: containers.env
     volumes:
       - /opt/postal/config:/config
 
@@ -14,6 +15,7 @@ services:
     network_mode: host
     cap_add:
       - NET_BIND_SERVICE
+    env_file: containers.env
     volumes:
       - /opt/postal/config:/config
 
@@ -22,6 +24,7 @@ services:
     command: postal worker
     restart: unless-stopped
     network_mode: host
+    env_file: containers.env
     volumes:
       - /opt/postal/config:/config
 
@@ -30,6 +33,7 @@ services:
     command: postal cron
     restart: unless-stopped
     network_mode: host
+    env_file: containers.env
     volumes:
       - /opt/postal/config:/config
 
@@ -38,6 +42,7 @@ services:
     command: postal requeuer
     restart: unless-stopped
     network_mode: host
+    env_file: containers.env
     volumes:
       - /opt/postal/config:/config
 
@@ -47,6 +52,7 @@ services:
     command: postal
     restart: unless-stopped
     network_mode: host
+    env_file: containers.env
     volumes:
       - /opt/postal/config:/config
 
