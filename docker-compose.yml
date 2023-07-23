@@ -27,6 +27,9 @@ services:
     env_file: containers.env
     volumes:
       - ${POSTAL_CONFIG_DIR}:/config:ro
+    deploy:
+      mode: replicated
+      replicas: ${POSTAL_WORKERS}
 
   cron:
     image: ${POSTAL_IMAGE}:${POSTAL_VERSION}
